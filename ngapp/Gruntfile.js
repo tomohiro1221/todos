@@ -1,4 +1,4 @@
-// Generated on 2014-06-24 using generator-angular 0.7.1
+// Generated on 2014-06-15 using generator-angular 0.7.1
 'use strict';
 
 // # Globbing
@@ -6,6 +6,11 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
+};
 
 module.exports = function (grunt) {
 
@@ -22,7 +27,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: '../public'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -65,13 +70,25 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [{
+        context: '/api',
+        host: 'localhost',
+        port: 3000
+      }],
       livereload: {
         options: {
           open: true,
           base: [
             '.tmp',
             '<%= yeoman.app %>'
-          ]
+          ],
+          middleware: function (connect) {
+            return [
+              proxySnippet,
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'app')
+            ];
+          }
         }
       },
       test: {
@@ -362,6 +379,7 @@ module.exports = function (grunt) {
       'clean:server',
       'bower-install',
       'concurrent:server',
+      'configureProxies',
       'autoprefixer',
       'connect:livereload',
       'watch'
