@@ -18,7 +18,7 @@ class TodosControllerTest < ActionController::TestCase
 
   test "should create todo" do
     assert_difference('Todo.count') do
-      post :create, todo: { string: @todo.string }
+      post :create, todo: { name: @todo.name }
     end
 
     assert_redirected_to todo_path(assigns(:todo))
@@ -35,7 +35,7 @@ class TodosControllerTest < ActionController::TestCase
   end
 
   test "should update todo" do
-    patch :update, id: @todo, todo: { string: @todo.string }
+    patch :update, id: @todo, todo: { name: @todo.name }
     assert_redirected_to todo_path(assigns(:todo))
   end
 
