@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: 'todos#index'
   scope :api do
     resources :todos
