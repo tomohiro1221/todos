@@ -1,8 +1,22 @@
-<div class="header">
+<div class="header" ng-controller="HeaderCtrl">
   <ul class="nav nav-pills pull-right">
-    <li class="active"><a ng-href="#">Login</a></li>
-    <li><a ng-href="#">Sign out</a></li>
-    <li><a ng-href="#">Contact</a></li>
+    <li><a href="#/login" ng-hide="isAuthenticated">Login</a></li>
+    <li><a href="#/register" ng-hide="isAuthenticated">Sign up</li>
+    <li><a ng-show="isAuthenticated" ng-click="logout()">Sign out</a></li>
+
+
+<!--     <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        Dropdown
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Dropdown link</a></li>
+        <li><a href="#">Dropdown link</a></li>
+      </ul>
+    </div> -->
+
+
   </ul>
   <h3 class="text-muted">ngapp</h3>
 </div>

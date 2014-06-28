@@ -8,7 +8,6 @@
       <div class="col-sm-8 col-sm-offset-2">
 
         <!-- LOOP OVER THE TODOS IN $scope.todos -->
-<!--         <input type="text" class="form-control input-lg text-center" placeholder="Search" ng-model="searchText"> -->
         <div class="row" ng-repeat="todo in todos | filter:searchText">
           [{{ $index + 1 }}] {{ todo.text }}
           <button type="submit" class="btn btn-danger btn-sm pull-right" ng-click="deleteTodo(todo)">×</button>
