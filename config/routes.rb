@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
   root to: 'todos#index'
   scope :api do
+    devise_for :users, controllers: { sessions: 'sessions' }
     resources :todos
   end
 
